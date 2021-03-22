@@ -1,0 +1,46 @@
+
+header{
+    height: 60px;
+    background: #eee;
+    width: 100%;
+}
+header h1 {
+    color: black;
+    text-align: center;
+    font-family: 'Pangolin', cursive;
+    font-size: xx-large;
+}
+img{
+    width: 200px;
+    height: 200px;
+    margin-left: 100px;
+   
+    
+}
+section{
+    width: 24%;
+    height: 300px;
+    float: left;
+    border: 1px solid black;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+section p,h2 {
+    text-align: center;
+    margin-bottom: 8px;
+
+}
+#photo-template{
+    /* visibility: hidden; */
+    display: none;
+}
+footer {
+ clear: both;
+    height: 80px;
+    width: 100%;
+    background: #eee;
+    text-align: center;
+    padding-top: 30px;
+    
+
+}
