@@ -26,15 +26,7 @@ section{
     margin-left: 10px;
     background: blanchedalmond;
 }
-section p,h2 {
-    text-align: center;
-    margin-bottom: 8px;
 
-}
-#photo-template{
-    /* visibility: hidden; */
-    display: none;
-}
 footer {
  clear: both;
     height: 80px;
