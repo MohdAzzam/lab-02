@@ -24,6 +24,7 @@ section{
     border: 1px solid black;
     margin-top: 30px;
     margin-left: 10px;
+    background: blanchedalmond;
 }
 section p,h2 {
     text-align: center;

@@ -36,7 +36,7 @@ $('select').change(function () {
     if (keys === 'default') {
         // $('section').remove();
         $('section').attr('id','photo-template');
-        getAnimalData;
+        getAnimalData();
     } else {
         // $('section').remove();
         console.log('sssssssss');
