@@ -1,4 +1,8 @@
-
+main{
+    display: flex;
+    flex-direction:column;
+    flex-wrap:wrap
+}
 header{
     height: 60px;
     background: #eee;
@@ -10,21 +14,24 @@ header h1 {
     font-family: 'Pangolin', cursive;
     font-size: xx-large;
 }
-img{
+.container h2{
+    order: 1;
+}
+.container img{
+    order: 2;
     width: 200px;
     height: 200px;
-    margin-left: 100px;
-   
-    
 }
-section{
-    width: 24%;
-    height: 300px;
-    float: left;
+.container p{
+    order: 3;
+    align-self:flex-end;
+
+}
+.container{
+    display: flex;
     border: 1px solid black;
-    margin-top: 30px;
-    margin-left: 10px;
     background: blanchedalmond;
+    justify-content: center;    
 }
 
 footer {
@@ -34,6 +41,5 @@ footer {
     background: #eee;
     text-align: center;
     padding-top: 30px;
-    
-
 }
+

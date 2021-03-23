@@ -38,4 +38,20 @@ Finish time: 5:30 pm
 
 Actual time needed to complete: 1 hour and 10 min
 
+#### Lab 03
+
+>I take the first three hour in the lab 02 stretch goal there was an error with sort and I fix it  
+
+----------------------------------
+
+Number and name of feature: Feature 1: Pagination
+
+Estimate of time needed to complete: 30 minutes
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
 made with ♥ via Mohammad Alazzam 
