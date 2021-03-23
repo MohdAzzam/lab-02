@@ -1,4 +1,5 @@
 'use strict';
+let newArr = [];
 function AnimalGallery(title, image_url, keyword, description, horns) {
     this.title = title;
     this.image_url = image_url;
@@ -7,12 +8,16 @@ function AnimalGallery(title, image_url, keyword, description, horns) {
     this.horns = horns;
 }
 
-$('select option').remove();
-$('select').append(`<option value='default'>Filter by Keyword</option>`);
 AnimalGallery.prototype.render = function () {
     let animal = $('#photo-template').clone();
+    let selectop = $('<option></option>').text(this.keyword);
+    selectop.attr('value', this.keyword);
+
+    if (!(newArr.includes(this.keyword))) {
+        newArr.push(this.keyword);
+        $('select').append(selectop);
+    }
     $('main').append(animal);
-    $('select').append(`<option value='${this.keyword}'>${this.keyword}</option>`);
     animal.find('h2').text(this.title);
     animal.find('img').attr('src', this.image_url);
     animal.find('img').attr('alt', this.description);
@@ -31,17 +36,16 @@ AnimalGallery.prototype.renderSelected = function () {
 };
 
 
-
 $('select').change(function () {
     let keys = $('select option:selected').val();
     if (keys === 'default') {
         // $('section').remove();
-        $('section').attr('id','photo-template');
+        $('section').attr('id', 'photo-template');
         getAnimalData();
     } else {
         // $('section').remove();
         console.log('sssssssss');
-        $('section').attr('id','photo-template');
+        $('section').attr('id', 'photo-template');
         getAnimalDataByKey(keys);
     }
 });
@@ -54,7 +58,7 @@ function getAnimalDataByKey(key) {
     $.ajax('data/page-1.json', ajaxSetting).then(data => {
         let animalObj;
         data.forEach(item => {
-            if(item.keyword===key){
+            if (item.keyword === key) {
                 animalObj = new AnimalGallery(item.title, item.image_url, item.keyword, item.description, item.horns);
                 // console.log(animalObj);
                 animalObj.renderSelected();
@@ -63,6 +67,7 @@ function getAnimalDataByKey(key) {
         });
     });
 }
+
 function getAnimalData() {
     const ajaxSetting = {
         method: 'get',
