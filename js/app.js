@@ -18,19 +18,6 @@ AnimalGallery.prototype.render = function () {
     animal.removeAttr('id');
 };
 
-AnimalGallery.prototype.renderSelected = function () {
-    let animal = $('#photo-template').clone();
-    $('main').append(animal);
-    $('select').append(`<option value='${this.keyword}'>${this.keyword}</option>`);
-    animal.find('h2').text(this.title);
-    animal.find('img').attr('src', this.image_url);
-    animal.find('img').attr('alt', this.description);
-    animal.find('p').text(this.description);
-    animal.removeAttr('id');
-};
-
-
-
 $('select').change(function () {
     let keys = $('select option:selected').val();
     if (keys === 'default') {
@@ -56,7 +43,7 @@ function getAnimalDataByKey(key) {
             if(item.keyword===key){
                 animalObj = new AnimalGallery(item.title, item.image_url, item.keyword, item.description, item.horns);
                 // console.log(animalObj);
-                animalObj.renderSelected();
+                animalObj.render();
             }
 
         });
