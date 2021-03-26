@@ -1,31 +1,31 @@
 'use strict';
-let newArr = [];
-let filterArray=[];
+let selectOption = [];
 function AnimalGallery(title, image_url, keyword, description, horns) {
     this.title = title;
     this.image_url = image_url;
     this.keyword = keyword;
     this.description = description;
     this.horns = horns;
-    filterArray.push(this.keyword);
+    selectOption.push(this);
 }
-let selectop = '';
-console.log(filterArray);
-console.log(newArr , 'this is line 11');
 AnimalGallery.prototype.render = function () {
     let template = $('#mustache-template').html();
     let html = Mustache.render(template, this);
     $('main').append(html);
-    selectop = $('<option></option>').text(this.keyword);
-    selectop.attr('value', this.keyword);
-    $('header select').attr('id', 'title');
-    if (!(newArr.includes(this.keyword))) {
-        newArr.push(this.keyword);
-        $('#title').append(selectop);
-    }
-
 };
 
+function renderOption() {
+    let a = [];
+    console.log(selectOption);
+    $('header select').attr('id', 'title');
+    $('#title').append(`<option value='default'>Filter by Keyword</option>`);
+    selectOption.forEach((item) => {
+        if (!a.includes(item.keyword)) {
+            a.push(item.keyword);
+            $('#title').append(`<option value='${item.keyword}'>${item.keyword}</option>`);
+        }
+    });
+}
 let select = $(`<select id='filter'>
             <option value='fil'>Filter</option>   
              <option value='alpha'>A-Z</option>   
@@ -92,10 +92,7 @@ function getAnimalDataByKey(key) {
         data.forEach(item => {
             if (item.keyword === key) {
                 animalObj = new AnimalGallery(item.title, item.image_url, item.keyword, item.description, item.horns);
-                // console.log(animalObj);
-                filterArray=[];
                 animalObj.render();
-                console.log(filterArray);
             }
         });
     });
@@ -117,12 +114,15 @@ function getSecoundPageDataByKey(key) {
     });
 }
 function getAnimalData() {
+    selectOption=[];
     $.ajax('data/page-1.json', ajaxSetting).then(data => {
         data.sort((a, b) => {
             return a.title.charCodeAt() - b.title.charCodeAt();
         });
         data.forEach(item => {
             let animalObj = new AnimalGallery(item.title, item.image_url, item.keyword, item.description, item.horns);
+            $('#title').empty();
+            renderOption();
             animalObj.render();
         });
     });
@@ -143,17 +143,21 @@ $('#page-2').on('click', function () {
 
 
 function getSecoundPageData() {
-    filterArray=[];
+    selectOption=[];
     $.ajax('data/page-2.json', ajaxSetting).then(data => {
         data.sort((a, b) => {
             return a.title.charCodeAt() - b.title.charCodeAt();
         });
         data.forEach(item => {
             let animalObj = new AnimalGallery(item.title, item.image_url, item.keyword, item.description, item.horns);
+            $('#title').empty();
+            // selectOption=[];
+            renderOption();
             animalObj.render();
         });
     });
 }
-
+$('#title').empty();
+renderOption();
 getAnimalData();
 getSecoundPageData();
