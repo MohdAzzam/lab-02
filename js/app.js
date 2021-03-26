@@ -1,28 +1,29 @@
 'use strict';
 let newArr = [];
+let filterArray=[];
 function AnimalGallery(title, image_url, keyword, description, horns) {
     this.title = title;
     this.image_url = image_url;
     this.keyword = keyword;
     this.description = description;
     this.horns = horns;
+    filterArray.push(this.keyword);
 }
-// function AnimalGallery(dataObj){
-//     for(let key in dataObj){
-//         this[key]=dataObj[key];
-//     }
-// }
+let selectop = '';
+console.log(filterArray);
+console.log(newArr , 'this is line 11');
 AnimalGallery.prototype.render = function () {
     let template = $('#mustache-template').html();
     let html = Mustache.render(template, this);
     $('main').append(html);
-    let selectop = $('<option></option>').text(this.keyword);
+    selectop = $('<option></option>').text(this.keyword);
     selectop.attr('value', this.keyword);
     $('header select').attr('id', 'title');
     if (!(newArr.includes(this.keyword))) {
         newArr.push(this.keyword);
         $('#title').append(selectop);
     }
+
 };
 
 let select = $(`<select id='filter'>
@@ -30,20 +31,16 @@ let select = $(`<select id='filter'>
              <option value='alpha'>A-Z</option>   
              <option value='horn'>Horn</option>   
              </select>`);
-$('main').append(select);
+$('.newHe').append(select);
+
 $('header select').change(function () {
     let keys = $('select option:selected').val();
     if (keys === 'default') {
-        // $('section').remove();
-        $('.container').empty();
-        $('section').attr('id', 'photo-template');
+        $('.container').remove();
         getAnimalData();
         getSecoundPageData();
     } else {
-        // $('section').remove();
-        console.log('sssssssss');
-        $('.container').empty();
-        $('section').attr('id', 'photo-template');
+        $('.container').remove();
         getAnimalDataByKey(keys);
         getSecoundPageDataByKey(keys);
     }
@@ -51,12 +48,10 @@ $('header select').change(function () {
 $('#filter').change(function () {
     let keyz = $('#filter option:selected').val();
     if (keyz === 'alpha') {
-        console.log('alpha');
-        $('section').attr('id', 'photo-template');
+        $('.container').remove();
         sortAnimal(keyz);
     } else if (keyz === 'horn') {
-        $('section').attr('id', 'photo-template');
-        console.log('horn');
+        $('.container').remove();
         sortAnimal(keyz);
 
     }
@@ -67,7 +62,6 @@ const ajaxSetting = {
     dataType: 'json'
 };
 function sortAnimal(key) {
-    $('.container').empty();
     $.ajax('data/page-1.json', ajaxSetting).then(data => {
         if (key === 'alpha') {
             data.sort((a, b) => {
@@ -90,7 +84,6 @@ function sortAnimal(key) {
     });
 }
 function getAnimalDataByKey(key) {
-    $('.container').empty();
     $.ajax('data/page-1.json', ajaxSetting).then(data => {
         let animalObj;
         data.sort((a, b) => {
@@ -100,14 +93,15 @@ function getAnimalDataByKey(key) {
             if (item.keyword === key) {
                 animalObj = new AnimalGallery(item.title, item.image_url, item.keyword, item.description, item.horns);
                 // console.log(animalObj);
+                filterArray=[];
                 animalObj.render();
+                console.log(filterArray);
             }
         });
     });
 }
 
 function getSecoundPageDataByKey(key) {
-    $('.container').empty();
     $.ajax('data/page-2.json', ajaxSetting).then(data => {
         let animalObj;
         data.sort((a, b) => {
@@ -116,14 +110,13 @@ function getSecoundPageDataByKey(key) {
         data.forEach(item => {
             if (item.keyword === key) {
                 animalObj = new AnimalGallery(item.title, item.image_url, item.keyword, item.description, item.horns);
-                // console.log(animalObj);
                 animalObj.render();
+
             }
         });
     });
 }
 function getAnimalData() {
-    $('.container').empty();
     $.ajax('data/page-1.json', ajaxSetting).then(data => {
         data.sort((a, b) => {
             return a.title.charCodeAt() - b.title.charCodeAt();
@@ -135,24 +128,22 @@ function getAnimalData() {
     });
 }
 
-$('main').append('<input type="submit" value="Page1" id="page-1">');
+$('.newHe').append('<input type="submit" value="Page1" id="page-1">');
 $('#page-1').on('click', function () {
-    $('section').attr('id', 'photo-template');
-    console.log('zzzzzzzzzzz');
+    $('.container').remove();
     getAnimalData();
 });
 
-$('main').append('<input type="submit" value="Page2" id="page-2">');
+$('.newHe').append('<input type="submit" value="Page2" id="page-2">');
 $('#page-2').on('click', function () {
-    // $('header select').remove();
-    $('section').attr('id', 'photo-template');
-    console.log('aaaaaaaaaaa');
+    $('.container').remove();
+
     getSecoundPageData();
 });
 
 
 function getSecoundPageData() {
-    $('.container').empty();
+    filterArray=[];
     $.ajax('data/page-2.json', ajaxSetting).then(data => {
         data.sort((a, b) => {
             return a.title.charCodeAt() - b.title.charCodeAt();
