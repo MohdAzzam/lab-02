@@ -46,12 +46,35 @@ Actual time needed to complete: 1 hour and 10 min
 
 Number and name of feature: Feature 1: Pagination
 
-Estimate of time needed to complete: 30 minutes
+Estimate of time needed to complete: 60 minutes
 
-Start time: _____
+Start time: 5 pm 
 
-Finish time: _____
+Finish time: 5:50 pm 
 
-Actual time needed to complete: _____
+Actual time needed to complete: 50 min 
 
+---------------------------------
+
+Number and name of feature: Feature 2: Templating
+
+Estimate of time needed to complete: 3 hour
+
+Start time: 6 pm 
+
+Finish time: 9:00 pm 
+
+Actual time needed to complete: 3 hour  
+
+-------------------------------------
+
+Number and name of feature: Feature 3: Styling with Flexbox
+
+Estimate of time needed to complete: 3 hour
+
+Start time: 9  pm 
+
+Finish time: 12:00 pm 
+
+Actual time needed to complete: 3 hour 
 made with ♥ via Mohammad Alazzam 

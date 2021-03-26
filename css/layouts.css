@@ -1,7 +1,9 @@
 main{
+    width: 100%;
     display: flex;
-    flex-direction:column;
-    flex-wrap:wrap
+    flex-wrap:wrap;
+    justify-content:space-evenly;
+
 }
 header{
     height: 60px;
@@ -21,17 +23,20 @@ header h1 {
     order: 2;
     width: 200px;
     height: 200px;
+    align-self: center;
 }
 .container p{
     order: 3;
-    align-self:flex-end;
+    text-align: center;
 
 }
 .container{
+    width: 300px;
+    height: 300px;
     display: flex;
-    border: 1px solid black;
-    background: blanchedalmond;
-    justify-content: center;    
+    /* background: blanchedalmond; */
+    flex-direction: column;
+     
 }
 
 footer {
@@ -43,3 +48,29 @@ footer {
     padding-top: 30px;
 }
 
+#title{
+padding-left: 10px;
+padding-top: 4px;
+}
+
+.newHe{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.newHe input{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 20px;
+}
+.newHe select{
+    padding: 10px;
+}
